@@ -1,4 +1,4 @@
-""" Finds vowels inside an inputted string """
+"""Finds vowels inside an inputted string."""
 
 vowels = ['a', 'e', 'i', 'o', 'u']
 found = []

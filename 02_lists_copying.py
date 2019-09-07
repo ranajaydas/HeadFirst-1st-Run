@@ -1,4 +1,4 @@
-"""Program to illustrate good and bad ways of copying lists"""
+"""Program to illustrate good and bad ways of copying lists."""
 
 list1 = [1, 2, 3, 4, 5]
 
