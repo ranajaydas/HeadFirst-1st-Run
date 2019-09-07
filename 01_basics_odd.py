@@ -1,4 +1,4 @@
-""" My first Python Program! (Not really) """
+"""My first Python Program! Not really."""
 from datetime import datetime
 from random import randint
 import time

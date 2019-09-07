@@ -1,4 +1,4 @@
-""" It's the '99 bottles of beer' song y'all! """
+"""It's the '99 bottles of beer' song y'all!"""
 bottle_word = 'bottles'
 
 for beer_num in range(99, 0, -1):
