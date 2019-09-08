@@ -1,7 +1,4 @@
-twilio*
-email*
-imap*
-smtp*
 __pycache__/
 .idea
 venv/
+~*
