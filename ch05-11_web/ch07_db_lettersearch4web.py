@@ -20,23 +20,27 @@ def log_request(req: 'flask_request', res: str) -> None:
     dbconfig = {'host': 'localhost',
                 'user': 'lettersearch',
                 'password': 'lettersearchpassword',
-                'database': 'lettersearchlogDB',}
+                'database': 'lettersearchlogDB'}
 
-    conn = mysql.connector.connect(**dbconfig)
-    cursor = conn.cursor()
+    conn = mysql.connector.connect(**dbconfig)      # ** unpacks the dictionary object, dbconfig
+    cursor = conn.cursor()                          # Creates a cursor for MySQL. Think of it as mysql>_ in cmd
+
+    # All of the above is setup code
     _SQL = """insert into log
               (phrase, letters, ip, browser_string, results)
               values
               (%s, %s, %s, %s, %s)"""
-    cursor.execute(_SQL, (req.form['phrase'],
+    cursor.execute(_SQL, (req.form['phrase'],       # Sends an execute command to the MySQL cursor
                           req.form['letters'],
                           req.remote_addr,
                           req.user_agent.browser,
                           res)
                    )
-    conn.commit()
-    cursor.close()
-    conn.close()
+    # All of the below is tear-down code. Hmmm...if only there was a better way to do this...
+
+    conn.commit()                                   # Forcibly commits any inserts to the log
+    cursor.close()                                  # Closes the cursor
+    conn.close()                                    # Closes the connection to MySQL
 
 
 @app.route('/viewlog')
@@ -60,6 +64,8 @@ def do_search() -> 'html':
     letters = request.form['letters']                 # Refer to input name='letters' in entry.html
     results = str(search4letters(phrase, letters))
     log_request(request, results)
+
+    # render_template is a handy Jinja2 function we imported above
     return render_template('results.html',
                            the_title='Here are your results:',                   # Variables inside the html rendered
                            the_phrase=phrase,
