@@ -26,7 +26,7 @@ def log_request(req: 'flask_request', res: str) -> None:
 
 
 @app.route('/viewlog')
-def view_the_log() -> str:
+def view_the_log() -> 'html':
     contents = []
     with open('lettersearch.log') as log_file:
         for row in log_file:
@@ -34,7 +34,10 @@ def view_the_log() -> str:
             for item in row.split('|'):               # Split each row by the delimiter '|'
                 contents[-1].append(escape(item))     # escape function deals with HTML tags like '<', '>' etc
 
-    return str(contents)
+    return render_template('viewlog.html',
+                           the_title='Log of Letter Searches:',
+                           the_row_titles=['Form Data', 'Remote Addr', 'User Agent', 'Results'],
+                           the_data=contents)
 
 
 @app.route('/search4', methods=['POST'])
