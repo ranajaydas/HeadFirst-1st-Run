@@ -2,4 +2,4 @@ __pycache__/
 .idea
 venv/
 ~*
-lettersearch.log
+ch05*/lettersearch.log
