@@ -1,4 +1,6 @@
-"""The context manager for MySQL DB connections."""
+"""The context manager for MySQL DB connections.
+Not only is this code easier to read, we've also decoupled
+all MySQL stuff into this file from the main program."""
 import mysql.connector
 
 
